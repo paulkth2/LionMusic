@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id = "@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#f9e81e"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:layout_marginBottom="50dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="60dp"
             android:layout_marginBottom="20dp"
             android:gravity="center">
 
@@ -24,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:textColor="#452007"
                 android:text="Your fav song"
                 android:textSize="20sp"/>
 
@@ -31,9 +39,9 @@
                 android:id="@+id/speakNowButton"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:padding="5dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:backgroundTint="@android:color/holo_orange_light"
                 android:src = "@drawable/microphone"
                 android:scaleType="fitXY"/>
         </LinearLayout>
@@ -44,8 +52,9 @@
             android:layout_height="50dp"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@android:color/holo_orange_light"
-            android:text = "Get me a playlist!"/>
+            android:background="#452007"
+            android:text = "Get me a playlist!"
+            android:textColor="#f9e81e"/>
 
         <TextView
             android:id="@+id/responseTxtView"
@@ -54,5 +63,4 @@
             android:textSize = "20sp"
             android:layout_margin="10dp"/>
     </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
