@@ -11,6 +11,7 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -112,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkAudioPermission();
-        checkInternetPermission();
+        checkPermission(Manifest.permission.INTERNET);
+        checkPermission(Manifest.permission.RECORD_AUDIO);
 
         songInputEditTxt = findViewById(R.id.songEditTxt);
         outputTextView = findViewById(R.id.responseTxtView);
@@ -132,24 +133,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void checkAudioPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        Uri.parse("package:" + getPackageName()));
-                startActivity(intent);
-                finish();
-            }
-        }
-    }
-
-    private void checkInternetPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        Uri.parse("package:" + getPackageName()));
-                startActivity(intent);
-                finish();
+    private boolean checkPermission(String permission) {
+        if (PermissionChecker.checkSelfPermission(this, permission)== PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{permission}, 100);
+            if (PermissionChecker.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                return false;
             }
         }
     }
