@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LionMusic</string>
+    <string name="edit_text_hint">Your fav song</string>
 </resources>
