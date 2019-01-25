@@ -3,8 +3,8 @@ package com.madcamp.lionmusic;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewManager;
 
 import io.saeid.fabloading.LoadingView;
 
@@ -37,5 +37,10 @@ public class SongsActivity extends Activity {
 
     public void start(View v) {
         loadingView.startAnimation();
+    }
+
+    private void endLoading(){
+        loadingView.pauseAnimation();
+        ((ViewManager)loadingView.getParent()).removeView(loadingView);
     }
 }
