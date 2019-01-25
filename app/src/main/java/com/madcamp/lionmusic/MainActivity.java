@@ -11,6 +11,7 @@ import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton speakButton;
     TextView outputTextView;
     EditText songInputEditTxt;
+    Button findButton;
 
     private RecognitionListener listener = new RecognitionListener() {
         @Override
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         songInputEditTxt = findViewById(R.id.songEditTxt);
         outputTextView = findViewById(R.id.responseTxtView);
         speakButton = findViewById(R.id.speakNowButton);
+        findButton = findViewById(R.id.searchButton);
 
         intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
@@ -123,6 +126,14 @@ public class MainActivity extends AppCompatActivity {
                 speechRecognizer=SpeechRecognizer.createSpeechRecognizer(getApplicationContext());
                 speechRecognizer.setRecognitionListener(listener);
                 speechRecognizer.startListening(intent);
+            }
+        });
+
+        findButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SongsActivity.class);
+                startActivity(intent);
             }
         });
     }
