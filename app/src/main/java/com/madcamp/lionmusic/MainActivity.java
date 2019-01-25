@@ -27,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
     TextView outputTextView;
     EditText songInputEditTxt;
 
-
     Button searchButton;
+    ImageButton todayButton;
+    ImageButton filterButton;
 
     private RecognitionListener listener = new RecognitionListener() {
 
@@ -119,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
         songInputEditTxt = findViewById(R.id.songEditTxt);
         outputTextView = findViewById(R.id.responseTxtView);
         speakButton = findViewById(R.id.speakNowButton);
+        todayButton = findViewById(R.id.todayButton);
+        filterButton = findViewById(R.id.filterButton);
 
         //search button for testing api purposes
         searchButton = (Button) findViewById(R.id.searchButton);
@@ -142,6 +145,22 @@ public class MainActivity extends AppCompatActivity {
                 Intent myIntent = new Intent (MainActivity.this, SongsActivity.class);
                 myIntent.putExtra("SearchValue", searchVal);
                 startActivity(myIntent);
+            }
+        });
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TagSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        todayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TodayMusicActivity.class);
+                startActivity(intent);
             }
         });
     }

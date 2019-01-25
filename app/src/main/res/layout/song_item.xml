@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:gravity="center"
     android:orientation="vertical">
     <LinearLayout
@@ -10,10 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="10">
         <TextView
             android:id="@+id/artist"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_bold"
             android:textAlignment="center"
@@ -24,7 +27,8 @@
 
         <TextView
             android:id="@+id/songTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="7"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_bold"
             android:textAlignment="center"
@@ -32,43 +36,5 @@
             android:textColor="@color/colorPrimaryDark"
             android:text="Song Title"
             android:layout_marginRight="10dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="10pt"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ToggleButton
-            android:id="@+id/playToggle"
-            android:layout_width="10pt"
-            android:layout_height="10pt"
-            android:layout_marginRight="3pt"
-            android:textOff=""
-            android:textOn=""
-            android:background="@drawable/check"/>
-
-        <ImageButton
-            android:id="@+id/rewindButton"
-            android:layout_width="10pt"
-            android:layout_height="10pt"
-            android:background="@drawable/rewindbutton"/>
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="80pt"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="3pt"
-            android:layout_marginLeft="3pt"/>
-        <TextView
-            android:id="@+id/timeLeft"
-            android:layout_width="20pt"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand_bold"
-            android:textSize="15sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="0:30"/>
     </LinearLayout>
 </LinearLayout>
