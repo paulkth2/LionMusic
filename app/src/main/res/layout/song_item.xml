@@ -35,31 +35,40 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_width="fill_parent"
+        android:layout_height="10pt"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:gravity="center"
         android:orientation="horizontal">
+
         <ToggleButton
             android:id="@+id/playToggle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="5dp"
+            android:layout_width="10pt"
+            android:layout_height="10pt"
+            android:layout_marginRight="3pt"
             android:textOff=""
             android:textOn=""
             android:background="@drawable/check"/>
 
         <ImageButton
             android:id="@+id/rewindButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="10pt"
+            android:layout_height="10pt"
             android:background="@drawable/rewindbutton"/>
         <SeekBar
             android:id="@+id/seekBar"
-            android:layout_width="fill_parent"
+            android:layout_width="80pt"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginRight="3pt"
+            android:layout_marginLeft="3pt"/>
+        <TextView
+            android:id="@+id/tiemLeft"
+            android:layout_width="20pt"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="0:30"/>
     </LinearLayout>
 </LinearLayout>
