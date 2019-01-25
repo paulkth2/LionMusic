@@ -2,6 +2,7 @@ package com.madcamp.lionmusic;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,6 @@ public class SongsActivity extends Activity {
     private ListView songList;
     private static final String TAG = "SongsActivity";
     private ArrayList<SongItem> testTitles;
-
 
     private LoadingView loadingView;
 
@@ -65,7 +65,8 @@ public class SongsActivity extends Activity {
                     Log.d(TAG, "onResponse: response Arrived");
                     Log.d(TAG, "onResponse: responses:" +resultArray.toString());
                     for (int i=0; i < resultArray.length(); i++) {
-                        titles.add(new SongItem(resultArray.getJSONObject(i).getString("title")));
+                        JSONObject jsonObject = resultArray.getJSONObject(i);
+                        titles.add(new SongItem(jsonObject.getString("title"), jsonObject.getJSONArray("artists").getJSONObject(0).getString("name"), Uri.parse(jsonObject.getString("audio_url"))));
                         Log.d(TAG, "onResponse: "+resultArray.getJSONObject(i).getString("title"));
                     }
 
