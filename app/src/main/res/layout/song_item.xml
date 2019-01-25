@@ -2,14 +2,46 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/songTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Song Title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
-    <TextView
+        <ToggleButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="15dp"
+            android:textOff=""
+            android:textOn=""
+            android:background="@drawable/check"/>
+
+        <ImageButton
+            android:id="@+id/rewindButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/rewindbutton"/>
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/songTitle"
-        android:fontFamily="@font/quicksand_bold"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        />
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"/>
 </LinearLayout>

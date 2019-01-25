@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView outputTextView;
     EditText songInputEditTxt;
 
+
     Button searchButton;
 
     private RecognitionListener listener = new RecognitionListener() {

@@ -44,7 +44,7 @@
                 android:padding="5dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:src = "@drawable/ic_microphone"
+                android:src = "@drawable/microphone"
                 android:scaleType="fitXY"/>
         </LinearLayout>
 
