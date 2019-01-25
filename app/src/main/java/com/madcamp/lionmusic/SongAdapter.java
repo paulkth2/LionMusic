@@ -30,6 +30,7 @@ public class SongAdapter extends BaseAdapter {
     private ToggleButton playButton;
     private ImageButton ffButton;
     private SeekBar seekBar;
+    private TextView timeText;
 
     private double startTime = 0;
     private double finalTime = 0;
@@ -64,6 +65,8 @@ public class SongAdapter extends BaseAdapter {
         //ImageView icon=(ImageView)convertView.findViewById(R.id.imageview);
         //icon.setImageResource(listviewitem.getIcon());
 
+        timeText = (TextView) convertView.findViewById(R.id.timeLeft);
+
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
@@ -96,6 +99,7 @@ public class SongAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if(!mediaPlayer.isPlaying()){
                     mediaPlayer.start();
+                    myHandler.postDelayed(UpdateSongTime,100);
                 }
                 else{
                     mediaPlayer.pause();
