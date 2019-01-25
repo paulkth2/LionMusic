@@ -26,9 +26,13 @@ public class MainActivity extends AppCompatActivity {
     ImageButton speakButton;
     TextView outputTextView;
     EditText songInputEditTxt;
-    Button findButton;
+
+
+    Button searchButton;
 
     private RecognitionListener listener = new RecognitionListener() {
+
+
         @Override
         public void onReadyForSpeech(Bundle params) {
             Toast.makeText(getApplicationContext(),"음성인식을 시작합니다.",Toast.LENGTH_SHORT).show();
@@ -115,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
         songInputEditTxt = findViewById(R.id.songEditTxt);
         outputTextView = findViewById(R.id.responseTxtView);
         speakButton = findViewById(R.id.speakNowButton);
-        findButton = findViewById(R.id.searchButton);
+
+        //search button for testing api purposes
+        searchButton = (Button) findViewById(R.id.searchButton);
 
         intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getPackageName());
@@ -129,11 +135,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findButton.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SongsActivity.class);
-                startActivity(intent);
+                String searchVal = songInputEditTxt.getText().toString();
+                Intent myIntent = new Intent (MainActivity.this, SongsActivity.class);
+                myIntent.putExtra("SearchValue", searchVal);
+                startActivity(myIntent);
             }
         });
     }

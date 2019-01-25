@@ -63,7 +63,7 @@
             android:layout_marginRight="3pt"
             android:layout_marginLeft="3pt"/>
         <TextView
-            android:id="@+id/tiemLeft"
+            android:id="@+id/timeLeft"
             android:layout_width="20pt"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_bold"
