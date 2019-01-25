@@ -3,6 +3,8 @@ package com.madcamp.lionmusic;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import io.saeid.fabloading.LoadingView;
 
@@ -20,11 +22,20 @@ public class SongsActivity extends Activity {
         int kakao_2 = R.drawable.kakao2;
         int kakao_3 = R.drawable.kakao3;
         int kakao_4 = R.drawable.kakao4;
-        loadingView.addAnimation(Color.parseColor("#FFD200"), kakao_1, LoadingView.FROM_LEFT);
-        loadingView.addAnimation(Color.parseColor("#2F5DA9"), kakao_2,LoadingView.FROM_TOP);
-        loadingView.addAnimation(Color.parseColor("#FF4218"), kakao_3, LoadingView.FROM_RIGHT);
-        loadingView.addAnimation(Color.parseColor("#C7E7FB"), kakao_4, LoadingView.FROM_BOTTOM);
+        loadingView.addAnimation(Color.parseColor("#ffebf4"), kakao_1, LoadingView.FROM_LEFT);
+        loadingView.addAnimation(Color.parseColor("#ebfff6"), kakao_2,LoadingView.FROM_TOP);
+        loadingView.addAnimation(Color.parseColor("#f0ebff"), kakao_3, LoadingView.FROM_RIGHT);
+        loadingView.addAnimation(Color.parseColor("#dbe7b5"), kakao_4, LoadingView.FROM_BOTTOM);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadingView.startAnimation();
+        loadingView.setRepeat(1000);
+    }
+
+    public void start(View v) {
         loadingView.startAnimation();
     }
 }
