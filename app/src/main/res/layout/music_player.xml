@@ -5,21 +5,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorBackground"
-    android:padding="10pt"
+    android:padding="5pt"
     android:layout_gravity="center">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:src="@drawable/logo"/>
 
     <TextView
         android:id="@+id/playerSongTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
         android:text="Song Title"
         android:fontFamily="@font/quicksand_bold"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textColor="@color/colorPrimaryDark"
         android:textAlignment="center"
         />
@@ -29,22 +31,22 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:src="@drawable/default_album_art"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:gravity="center"
         android:orientation="horizontal">
         <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="3pt"
-            android:layout_marginLeft="3pt"/>
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="3dp"/>
         <TextView
             android:id="@+id/timeLeft"
             android:layout_width="wrap_content"
