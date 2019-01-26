@@ -10,13 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#f9e81e"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/profileButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:background="@drawable/profile"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/logo"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,6 +59,7 @@
             android:id="@+id/searchButton"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:clickable="true"
             android:focusable="true"
             android:background="#452007"
@@ -62,8 +70,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -74,8 +83,8 @@
 
                 <ImageButton
                     android:id = "@+id/todayButton"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/musicbutton"
                     />
                 <TextView
@@ -83,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand_bold"
                     android:textColor="#452007"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textAlignment="center"
                     android:text="Today's music"/>
             </LinearLayout>
@@ -97,18 +106,18 @@
 
                 <ImageButton
                     android:id = "@+id/filterButton"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/filterbutton"
-                    />
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/filterbutton"/>
+
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand_bold"
                     android:textColor="#452007"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textAlignment="center"
-                    android:text="Tag Search"/>
+                    android:text="Search\n"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
