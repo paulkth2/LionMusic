@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".LastFmTestingActivity"></activity>
         <activity android:name=".SongsActivity"/>
+        <activity android:name=".PlayerActivity"/>
     </application>
 
 </manifest>

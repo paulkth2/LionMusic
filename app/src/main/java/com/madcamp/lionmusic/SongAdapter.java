@@ -26,20 +26,8 @@ public class SongAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<SongItem> titles;
     private int layout;
-    private MediaPlayer mediaPlayer;
-    private ToggleButton playButton;
-    private ImageButton ffButton;
-    private SeekBar seekBar;
-    private TextView timeText;
-
-    private double startTime = 0;
-    private double finalTime = 0;
-
-    private int forwardTime = 5000;
 
     private final Context mContext;
-    private Handler myHandler = new Handler();
-
 
 
     public SongAdapter(Context context, int layout, ArrayList<SongItem> titles){
@@ -65,6 +53,8 @@ public class SongAdapter extends BaseAdapter {
         //ImageView icon=(ImageView)convertView.findViewById(R.id.imageview);
         //icon.setImageResource(listviewitem.getIcon());
 
+
+        /*
         timeText = (TextView) convertView.findViewById(R.id.timeLeft);
 
         mediaPlayer = new MediaPlayer();
@@ -119,6 +109,7 @@ public class SongAdapter extends BaseAdapter {
             }
         }});
 
+        */
 
 
         TextView artist=(TextView)convertView.findViewById(R.id.artist);
@@ -127,6 +118,8 @@ public class SongAdapter extends BaseAdapter {
         title.setText(songitem.getTitle());
         return convertView;
     }
+
+    /*
 
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
@@ -141,4 +134,5 @@ public class SongAdapter extends BaseAdapter {
             myHandler.postDelayed(this, 100);
         }
     };
+    */
 }

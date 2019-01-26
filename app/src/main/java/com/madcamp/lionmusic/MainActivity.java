@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     Intent intent;
     SpeechRecognizer speechRecognizer;
     ImageButton speakButton;
-    TextView outputTextView;
     EditText songInputEditTxt;
 
     Button searchButton;
@@ -118,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         checkPermission(Manifest.permission.RECORD_AUDIO);
 
         songInputEditTxt = findViewById(R.id.songEditTxt);
-        outputTextView = findViewById(R.id.responseTxtView);
         speakButton = findViewById(R.id.speakNowButton);
         todayButton = findViewById(R.id.todayButton);
         filterButton = findViewById(R.id.filterButton);
