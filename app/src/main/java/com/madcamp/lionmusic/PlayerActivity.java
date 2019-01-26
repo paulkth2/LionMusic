@@ -104,7 +104,7 @@ public class PlayerActivity extends AppCompatActivity {
                                             finalTime)))
                     );*/
 
-                    timeText.setText(String.format("%d min, %d sec",
+                    timeText.setText(String.format("%d : %d",
                             TimeUnit.MILLISECONDS.toMinutes((long) startTime),
                             TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
                                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
@@ -152,7 +152,7 @@ public class PlayerActivity extends AppCompatActivity {
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
             startTime = mediaPlayer.getCurrentPosition();
-            timeText.setText(String.format("%d min, %d sec",
+            timeText.setText(String.format("%d : %d",
                     TimeUnit.MILLISECONDS.toMinutes((long) startTime),
                     TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.

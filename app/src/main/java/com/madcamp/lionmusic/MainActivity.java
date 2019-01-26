@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyMusicActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getApplicationContext(), MyMusicActivity.class);
+                //startActivity(intent);
             }
         });
 
@@ -153,7 +153,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String searchVal = songInputEditTxt.getText().toString();
                 Intent myIntent = new Intent (MainActivity.this, SongsActivity.class);
-                myIntent.putExtra("SearchValue", searchVal);
+                String urlFirst = "https://secure.galiboo.com/api/discover/tracks/smart_search/?token=7bc7a3054fbbf21480aa5f767fc67aa31fc30c68&threshold=0.8&q=";
+                String urlSecond = "&count=30&page=1";
+                myIntent.putExtra("SearchValue", urlFirst+searchVal+urlSecond);
                 startActivity(myIntent);
             }
         });

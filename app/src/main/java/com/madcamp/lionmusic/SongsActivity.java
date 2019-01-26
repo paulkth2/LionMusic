@@ -43,14 +43,10 @@ public class SongsActivity extends Activity {
         setContentView(R.layout.activity_songs);
 
         titles = new ArrayList<>();
-        String searchString = getIntent().getStringExtra("SearchValue");
+        String requestUrl = getIntent().getStringExtra("SearchValue");
 
         songList = (ListView) findViewById(R.id.song_list);
 
-        String urlFirst = "https://secure.galiboo.com/api/discover/tracks/smart_search/?token=7bc7a3054fbbf21480aa5f767fc67aa31fc30c68&threshold=0.8&q=";
-        String urlSecond = "&count=30&page=1";
-
-        requestUrl = urlFirst+searchString+urlSecond;
         Log.d(TAG, "onCreate: "+requestUrl);
 
         loadingView = findViewById(R.id.loading_view);
