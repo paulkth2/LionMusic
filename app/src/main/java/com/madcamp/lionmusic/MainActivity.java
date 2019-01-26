@@ -27,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
     EditText songInputEditTxt;
 
     Button searchButton;
+    ImageButton profileButton;
     ImageButton todayButton;
     ImageButton filterButton;
+
 
     private RecognitionListener listener = new RecognitionListener() {
 
@@ -120,6 +122,16 @@ public class MainActivity extends AppCompatActivity {
         speakButton = findViewById(R.id.speakNowButton);
         todayButton = findViewById(R.id.todayButton);
         filterButton = findViewById(R.id.filterButton);
+        profileButton = findViewById(R.id.profileButton);
+
+        //profile button for saving my preferences
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MyMusicActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //search button for testing api purposes
         searchButton = (Button) findViewById(R.id.searchButton);
@@ -149,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TagSearchActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivity(intent);
             }
         });
