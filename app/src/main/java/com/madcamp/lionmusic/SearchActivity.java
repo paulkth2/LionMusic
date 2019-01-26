@@ -61,10 +61,10 @@ public class SearchActivity extends Activity {
                 String urlSecond = "&limit=20&page=1";
                 String urlPart = "";
 
-                if(categoryBool){
-                    urlPart = "track";
+                if(!categoryBool){
+                    urlPart = "track=";
                 } else {
-                    urlPart = "artist";
+                    urlPart = "artist=";
                 }
 
                 String url = urlFirst+urlPart+searchInput.getText().toString()+urlSecond;

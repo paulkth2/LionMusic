@@ -22,6 +22,7 @@
         <activity android:name=".LastFmTestingActivity"></activity>
         <activity android:name=".SongsActivity"/>
         <activity android:name=".PlayerActivity"/>
+        <activity android:name=".SearchActivity"/>
     </application>
 
 </manifest>

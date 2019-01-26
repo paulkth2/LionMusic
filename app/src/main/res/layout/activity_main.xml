@@ -18,8 +18,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="right"
+            android:background="@drawable/profile"
             />
-        <!--android:background="@drawable/profile"-->
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

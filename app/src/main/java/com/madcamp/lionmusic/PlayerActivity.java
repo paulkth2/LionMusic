@@ -1,5 +1,6 @@
 package com.madcamp.lionmusic;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -19,12 +22,15 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class PlayerActivity extends AppCompatActivity {
+    private static final String TAG = "PlayerActivity";
+    
     private TextView titleText;
     private SeekBar seekBar;
     private ToggleButton playButton;
     private ImageButton rewindButton;
     private ImageButton forwardButton;
     private TextView timeText;
+    private TextView artistText;
 
     private MediaPlayer mediaPlayer;
     private Uri songUri;
@@ -51,6 +57,7 @@ public class PlayerActivity extends AppCompatActivity {
         //initialize views
         titleText = (TextView)findViewById(R.id.playerSongTitle);
         timeText = (TextView)findViewById(R.id.timeLeft);
+        artistText = (TextView)findViewById(R.id.playerArtist);
         seekBar = (SeekBar)findViewById(R.id.seekBar);
         playButton = (ToggleButton)findViewById(R.id.playToggle);
         rewindButton = (ImageButton)findViewById(R.id.rewindBackButton);
@@ -60,6 +67,7 @@ public class PlayerActivity extends AppCompatActivity {
         seekBar.setClickable(false);
 
         titleText.setText(getIntent().getStringExtra("title"));
+        artistText.setText(getIntent().getStringExtra("artist"));
 
         mediaPlayer = new MediaPlayer();
 
@@ -81,6 +89,7 @@ public class PlayerActivity extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
         }
+
 
         playButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -104,7 +113,7 @@ public class PlayerActivity extends AppCompatActivity {
                                             finalTime)))
                     );*/
 
-                    timeText.setText(String.format("%d : %d",
+                    timeText.setText(String.format("%d: %d",
                             TimeUnit.MILLISECONDS.toMinutes((long) startTime),
                             TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
                                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
@@ -146,13 +155,50 @@ public class PlayerActivity extends AppCompatActivity {
             }
         });
 
+        titleText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String urlFirst = "https://secure.galiboo.com/api/metadata/tracks/search/?token=7bc7a3054fbbf21480aa5f767fc67aa31fc30c68&threshold=0.8&";
+                String urlSecond = "&limit=20&page=1";
+                String urlPart = "track=";
+
+                String url = urlFirst+urlPart+titleText.getText().toString()+urlSecond;
+
+                Intent myIntent = new Intent(PlayerActivity.this, SongsActivity.class);
+                myIntent.putExtra("SearchValue", url);
+                mediaPlayer.stop();
+                oneTimeOnly = 0;
+                seekBar.setProgress(0);
+                startActivity(myIntent);
+                finish();
+            }
+        });
+
+        artistText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String urlFirst = "https://secure.galiboo.com/api/metadata/tracks/search/?token=7bc7a3054fbbf21480aa5f767fc67aa31fc30c68&threshold=0.8&";
+                String urlSecond = "&limit=20&page=1";
+                String urlPart = "artist=";
+
+                String url = urlFirst+urlPart+artistText.getText().toString()+urlSecond;
+
+                Intent myIntent = new Intent(PlayerActivity.this, SongsActivity.class);
+                myIntent.putExtra("SearchValue", url);
+                mediaPlayer.stop();
+                oneTimeOnly = 0;
+                seekBar.setProgress(0);
+                startActivity(myIntent);
+                finish();
+            }
+        });
 
     }
 
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
             startTime = mediaPlayer.getCurrentPosition();
-            timeText.setText(String.format("%d : %d",
+            timeText.setText(String.format("%d: %d",
                     TimeUnit.MILLISECONDS.toMinutes((long) startTime),
                     TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
@@ -163,4 +209,13 @@ public class PlayerActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d(TAG, "onBackPressed: ");
+        oneTimeOnly = 0;
+        seekBar.setProgress(0);
+        mediaPlayer.stop();
+        finish();
+    }
 }
