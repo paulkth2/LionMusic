@@ -24,14 +24,12 @@ public class MainActivity extends AppCompatActivity {
     Intent intent;
     SpeechRecognizer speechRecognizer;
     ImageButton speakButton;
-    TextView outputTextView;
     EditText songInputEditTxt;
 
     Button searchButton;
-    ImageButton profileButton;
     ImageButton todayButton;
     ImageButton filterButton;
-
+    ImageButton profileButton;
 
     private RecognitionListener listener = new RecognitionListener() {
 
@@ -123,14 +121,14 @@ public class MainActivity extends AppCompatActivity {
         speakButton = findViewById(R.id.speakNowButton);
         todayButton = findViewById(R.id.todayButton);
         filterButton = findViewById(R.id.filterButton);
-        profileButton = findViewById(R.id.profileButton);
 
-        //profile button for saving my preferences
+        //profile button for kakaotalk login
+        profileButton = findViewById(R.id.profileButton);
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyMusicActivity.class);
-                startActivity(intent);
+                Intent myIntent = new Intent(getApplicationContext(), MyMusicActivity.class);
+                startActivity(myIntent);
             }
         });
 
