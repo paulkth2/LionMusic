@@ -1,39 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/homeButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/homebutton"
-            android:layout_gravity="center_vertical"/>
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/homebutton"
+                android:layout_gravity="center_vertical"/>
 
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="40dp"
-            android:src="@drawable/logo"/>
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/logo"/>
 
-        <ImageButton
-            android:id="@+id/logoutButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/logoutbutton"/>
+            <ImageButton
+                android:id="@+id/logoutButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/logoutbutton"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"/>
+
+            <TextView
+                android:id="@+id/nickname"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="nickname"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:fontFamily="@font/quicksand_bold"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <ImageButton
+                android:id="@+id/friendButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/friendbutton"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Liked Artists"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"/>
+
+        <ListView
+            android:id="@+id/artistListview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Liked Songs"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"/>
+
+        <ListView
+            android:id="@+id/songListview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Liked Tags"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/likedTag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/likedTag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/likedTag3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"/>
+
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>
