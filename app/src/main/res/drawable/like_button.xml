@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/likebutton"
+        android:state_checked="true" />
+    <item android:drawable="@drawable/dislikebutton"
+        android:state_checked="false"/>
+</selector>

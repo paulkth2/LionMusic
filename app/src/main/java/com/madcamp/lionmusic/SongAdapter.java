@@ -61,7 +61,7 @@ public class SongAdapter extends BaseAdapter {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         playButton = (ToggleButton) convertView.findViewById(R.id.playToggle);
-        ffButton = (ImageButton) convertView.findViewById(R.id.rewindButton);
+        //ffButton = (ImageButton) convertView.findViewById(R.id.rewindButton);
         seekBar = (SeekBar) convertView.findViewById(R.id.seekBar);
 
         try {
