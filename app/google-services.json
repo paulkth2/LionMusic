@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "777478528398",
+    "firebase_url": "https://lionmusic-938ef.firebaseio.com",
+    "project_id": "lionmusic-938ef",
+    "storage_bucket": "lionmusic-938ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777478528398:android:9768cb57cd1184d7",
+        "android_client_info": {
+          "package_name": "com.madcamp.lionmusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777478528398-thcdoteu4dqcd864epqmkc92fm02lrli.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.madcamp.lionmusic",
+            "certificate_hash": "12ad24366332eb6c26a0c146c87c115b0091e219"
+          }
+        },
+        {
+          "client_id": "777478528398-7klqnk1h5h5eaf20c9ok57ac9o5cr7hq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWe_C2nDTpwVxsN5ZgonxbpHLTyhqrtBw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777478528398-7klqnk1h5h5eaf20c9ok57ac9o5cr7hq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
