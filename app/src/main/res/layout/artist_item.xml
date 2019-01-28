@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/artistName"
             android:layout_width="0dp"
-            android:layout_weight="3"
+            android:layout_weight="9"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_bold"
             android:textAlignment="center"
