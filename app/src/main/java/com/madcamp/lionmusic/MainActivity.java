@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
     EditText songInputEditTxt;
 
     Button searchButton;
+    ImageButton profileButton;
     ImageButton todayButton;
     ImageButton filterButton;
-    ImageButton profileButton;
 
     private RecognitionListener listener = new RecognitionListener() {
 
@@ -121,14 +121,14 @@ public class MainActivity extends AppCompatActivity {
         speakButton = findViewById(R.id.speakNowButton);
         todayButton = findViewById(R.id.todayButton);
         filterButton = findViewById(R.id.filterButton);
-
-        //profile button for kakaotalk login
         profileButton = findViewById(R.id.profileButton);
+
+        //profile button for saving my preferences
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(getApplicationContext(), MyMusicActivity.class);
-                startActivity(myIntent);
+                //Intent intent = new Intent(getApplicationContext(), MyMusicActivity.class);
+                //startActivity(intent);
             }
         });
 
@@ -152,7 +152,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String searchVal = songInputEditTxt.getText().toString();
                 Intent myIntent = new Intent (MainActivity.this, SongsActivity.class);
-                myIntent.putExtra("SearchValue", searchVal);
+                String urlFirst = "https://secure.galiboo.com/api/discover/tracks/smart_search/?token=7bc7a3054fbbf21480aa5f767fc67aa31fc30c68&threshold=0.8&q=";
+                String urlSecond = "&count=30&page=1";
+                myIntent.putExtra("SearchValue", urlFirst+searchVal+urlSecond);
                 startActivity(myIntent);
             }
         });
