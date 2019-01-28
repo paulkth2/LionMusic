@@ -131,7 +131,10 @@
                 android:layout_marginBottom="20dp"
                 android:background="@color/colorPrimary"
                 android:text="LOG IN"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/quicksand_bold"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"/>
 
             <Button
                 android:id="@+id/registerButton"
@@ -143,7 +146,10 @@
                 android:layout_marginBottom="20dp"
                 android:background="@color/colorPrimary"
                 android:text="REGISTER"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/quicksand_bold"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
