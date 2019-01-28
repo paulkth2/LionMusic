@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.madcamp.lionmusic">
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,10 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LastFmTestingActivity"></activity>
-        <activity android:name=".SongsActivity"/>
-        <activity android:name=".PlayerActivity"/>
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".LastFmTestingActivity" />
+        <activity android:name=".SongsActivity" />
+        <activity android:name=".PlayerActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/Theme.Transparent"></activity>
     </application>
 
 </manifest>
