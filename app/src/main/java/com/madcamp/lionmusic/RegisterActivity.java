@@ -132,8 +132,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     newUser.setValue(user);
                                     Toast.makeText(RegisterActivity.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
 
-
-
                                     //Returns to login Activity by finishing
                                     finish();
                                 }

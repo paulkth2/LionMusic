@@ -5,12 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 public class MyMusicActivity extends AppCompatActivity {
 
     private ImageButton homeButton;
     private ImageButton logoutButton;
     private ImageButton friendButton;
+
+    private ListView artistList;
+    private ListView songList;
+
+    private String tag1 = "";
+    private String tag2 = "";
+    private String tag3 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -20,6 +28,9 @@ public class MyMusicActivity extends AppCompatActivity {
         homeButton = findViewById(R.id.homeButton);
         logoutButton = findViewById(R.id.logoutButton);
         friendButton = findViewById(R.id.friendButton);
+
+        artistList = findViewById(R.id.artistListview);
+        songList = findViewById(R.id.songListview);
 
         //홈으로 돌아가는 버튼
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +57,9 @@ public class MyMusicActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
     }
 
     @Override

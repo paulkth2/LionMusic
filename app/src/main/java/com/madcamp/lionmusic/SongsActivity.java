@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import android.view.ViewManager;
+import android.widget.Toast;
 
 import io.saeid.fabloading.LoadingView;
 
@@ -73,7 +74,7 @@ public class SongsActivity extends Activity {
                         titles.add(new SongItem(jsonObject.getString("title"), jsonObject.getJSONArray("artists").getJSONObject(0).getString("name"), Uri.parse(jsonObject.getString("audio_url"))));
                     }
 
-                    SongAdapter adapter2 = new SongAdapter(SongsActivity.this, R.layout.song_item, titles);
+                    SongAdapter adapter2 = new SongAdapter(SongsActivity.this, R.layout.song_item, titles, false);
                     songList.setAdapter(adapter2);
 
                     loadingView.pauseAnimation();
@@ -102,6 +103,7 @@ public class SongsActivity extends Activity {
         songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(SongsActivity.this, "clicked item"+position, Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(SongsActivity.this, PlayerActivity.class);
                 myIntent.putExtra("uri", titles.get(position).getSongUri().toString());
                 myIntent.putExtra("title", titles.get(position).getTitle());

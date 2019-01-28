@@ -26,15 +26,17 @@ public class SongAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<SongItem> titles;
     private int layout;
+    private boolean liked;
 
     private final Context mContext;
 
 
-    public SongAdapter(Context context, int layout, ArrayList<SongItem> titles){
+    public SongAdapter(Context context, int layout, ArrayList<SongItem> titles, boolean liked){
         this.inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.titles=titles;
         this.layout=layout;
         this.mContext=context;
+        this.liked=liked;
     }
 
 
@@ -50,72 +52,15 @@ public class SongAdapter extends BaseAdapter {
             convertView=inflater.inflate(layout,parent,false);
         }
         SongItem songitem = titles.get(position);
-        //ImageView icon=(ImageView)convertView.findViewById(R.id.imageview);
-        //icon.setImageResource(listviewitem.getIcon());
 
-
-        /*
-        timeText = (TextView) convertView.findViewById(R.id.timeLeft);
-
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        playButton = (ToggleButton) convertView.findViewById(R.id.playToggle);
-        //ffButton = (ImageButton) convertView.findViewById(R.id.rewindButton);
-        seekBar = (SeekBar) convertView.findViewById(R.id.seekBar);
-
-        try {
-            mediaPlayer.setDataSource(mContext, songitem.getSongUri());
-        } catch (IllegalArgumentException e) {
-            Toast.makeText(mContext, "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        } catch (SecurityException e) {
-            Toast.makeText(mContext, "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        } catch (IllegalStateException e) {
-            Toast.makeText(mContext, "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            mediaPlayer.prepare();
-        } catch (IllegalStateException e) {
-            Toast.makeText(mContext, "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            Toast.makeText(mContext, "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
-        }
-
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!mediaPlayer.isPlaying()){
-                    mediaPlayer.start();
-                    myHandler.postDelayed(UpdateSongTime,100);
-                }
-                else{
-                    mediaPlayer.pause();
-                }
-            }
-        });
-
-        ffButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int temp = (int)startTime;
-
-                if((temp+forwardTime)<=finalTime){
-                    startTime = startTime + forwardTime;
-                    mediaPlayer.seekTo((int) startTime);
-
-            }
-        }});
-
-        */
 
 
         TextView artist=(TextView)convertView.findViewById(R.id.artist);
         artist.setText(songitem.getArtist());
         TextView title=(TextView)convertView.findViewById(R.id.songTitle);
         title.setText(songitem.getTitle());
+        ToggleButton heartToggle = convertView.findViewById(R.id.likeButton);
+        heartToggle.setChecked(liked);
         return convertView;
     }
 
