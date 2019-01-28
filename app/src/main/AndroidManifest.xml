@@ -25,6 +25,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".LoginActivity"
             android:theme="@style/Theme.Transparent"></activity>
+        <activity android:name=".MyMusicActivity"></activity>
     </application>
 
 </manifest>

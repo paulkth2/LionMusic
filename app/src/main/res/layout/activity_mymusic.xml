@@ -10,18 +10,22 @@
         android:layout_height="70dp"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp">
+
         <ImageButton
             android:id="@+id/homeButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/homebutton"
             android:layout_gravity="center_vertical"/>
+
         <ImageView
             android:layout_width="180dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="50dp"
             android:src="@drawable/logo"/>
+
+
     </LinearLayout>
 
 
