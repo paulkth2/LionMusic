@@ -8,9 +8,9 @@ public class User {
     private String nickname;
     private String profile;
 
-    private HashMap<String, String> friends;
-    private HashMap<String, String> likedArtist;
-    private HashMap<String, String> tags;
+    private List<String> friends;
+    private List<String> likedArtist;
+    private List<String> tags;
 
     private List<HashMap<String, String>> likedSongs;
     private HashMap<String, String> songItem;
@@ -18,7 +18,7 @@ public class User {
     public User() {
     }
 
-    public User(String email, String nickname, String profile, HashMap<String, String> friends, HashMap<String, String> likedArtist, HashMap<String, String> tags, List<HashMap<String, String>> likedSongs, HashMap<String, String> songItem) {
+    public User(String email, String nickname, String profile, List<String> friends, List<String> likedArtist, List<String> tags, List<HashMap<String, String>> likedSongs, HashMap<String, String> songItem) {
         this.email = email;
         this.nickname = nickname;
         this.profile = profile;
@@ -53,27 +53,27 @@ public class User {
         this.profile = profile;
     }
 
-    public HashMap<String, String> getFriends() {
+    public List<String> getFriends() {
         return friends;
     }
 
-    public void setFriends(HashMap<String, String> friends) {
+    public void setFriends(List<String> friends) {
         this.friends = friends;
     }
 
-    public HashMap<String, String> getLikedArtist() {
+    public List<String> getLikedArtist() {
         return likedArtist;
     }
 
-    public void setLikedArtist(HashMap<String, String> likedArtist) {
+    public void setLikedArtist(List<String> likedArtist) {
         this.likedArtist = likedArtist;
     }
 
-    public HashMap<String, String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(HashMap<String, String> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 

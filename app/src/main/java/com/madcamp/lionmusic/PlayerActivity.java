@@ -63,6 +63,7 @@ public class PlayerActivity extends AppCompatActivity {
         rewindButton = (ImageButton)findViewById(R.id.rewindBackButton);
         forwardButton = (ImageButton)findViewById(R.id.rewindForwardButton);
 
+        Log.d(TAG, "song url: "+getIntent().getStringExtra("uri"));
         songUri = Uri.parse(getIntent().getStringExtra("uri"));
         seekBar.setClickable(false);
 

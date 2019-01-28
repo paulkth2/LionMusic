@@ -5,4 +5,8 @@ public class ArtistItem {
 
     public String getArtist(){return artist;}
     public void setArtist(String newArtist){this.artist = newArtist;}
+
+    public ArtistItem(String artist) {
+        this.artist = artist;
+    }
 }

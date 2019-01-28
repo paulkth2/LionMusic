@@ -1,13 +1,33 @@
 package com.madcamp.lionmusic;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MyMusicActivity extends AppCompatActivity {
+    private static final String TAG = "MyMusicActivity";
 
     private ImageButton homeButton;
     private ImageButton logoutButton;
@@ -20,6 +40,12 @@ public class MyMusicActivity extends AppCompatActivity {
     private String tag2 = "";
     private String tag3 = "";
 
+    ArrayList<SongItem> likedSongsArray;
+    ArrayList<ArtistItem> likedArtistArray;
+
+    private DatabaseReference likedArtistPreference;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -31,6 +57,9 @@ public class MyMusicActivity extends AppCompatActivity {
 
         artistList = findViewById(R.id.artistListview);
         songList = findViewById(R.id.songListview);
+
+        likedSongsArray = new ArrayList<>();
+        likedArtistArray = new ArrayList<>();
 
         //홈으로 돌아가는 버튼
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +87,91 @@ public class MyMusicActivity extends AppCompatActivity {
             }
         });
 
+        likedArtistPreference = FirebaseDatabase.getInstance().getReference();
 
+        Query artistQuery = likedArtistPreference.child("users").orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
+        Log.d(TAG, "onCreate: Query");
+        artistQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot post : dataSnapshot.getChildren()){
+                    ArrayList<String> likedArtists = (ArrayList<String>) post.child("likedArtist").getValue();
+                    likedArtistArray = new ArrayList<>();
+                    for (int i=0; i<likedArtists.size(); i++){
+                        likedArtistArray.add(new ArtistItem(likedArtists.get(i)));
+                    }
+                    ArtistAdapter adapter = new ArtistAdapter(MyMusicActivity.this, R.layout.artist_item, likedArtistArray, true);
+                    artistList.setAdapter(adapter);
+                    Log.d(TAG, "Got this: "+likedArtists);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        artistQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot post : dataSnapshot.getChildren()){
+                    ArrayList<HashMap<String, String>> likedSongs = (ArrayList<HashMap<String, String>>) post.child("likedSongs").getValue();
+                    likedSongsArray = new ArrayList<>();
+                    for (int i=0; i<likedSongs.size(); i++){
+                        SongItem newSong = new SongItem(likedSongs.get(i).get("title"), likedSongs.get(i).get("artist"), Uri.parse(likedSongs.get(i).get("url")));
+
+                        likedSongsArray.add(newSong);
+                    }
+                    SongAdapter adapter = new SongAdapter(MyMusicActivity.this, R.layout.song_item, likedSongsArray, true);
+                    songList.setAdapter(adapter);
+                    //Log.d(TAG, "Got this: "+likedArtists);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent myIntent = new Intent(MyMusicActivity.this, PlayerActivity.class);
+                myIntent.putExtra("uri", likedSongsArray.get(position).getSongUri().toString());
+                myIntent.putExtra("title", likedSongsArray.get(position).getTitle());
+                myIntent.putExtra("artist", likedSongsArray.get(position).getArtist());
+                startActivity(myIntent);
+            }
+        });
+
+        artistList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String urlFirst = "https://secure.galiboo.com/api/metadata/tracks/search/?token=7bc7a3054fbbf21480aa5f767fc67aa31fc30c68&threshold=0.8&";
+                String urlSecond = "&limit=20&page=1";
+                String urlPart = "";
+                urlPart = "artist=";
+                String url = urlFirst+urlPart+likedArtistArray.get(position).getArtist()+urlSecond;
+
+                Intent myIntent = new Intent(MyMusicActivity.this, SongsActivity.class);
+                myIntent.putExtra("SearchValue", url);
+                startActivity(myIntent);
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MyMusicActivity.this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent myIntent = new Intent(MyMusicActivity.this, MainActivity.class);
+                startActivity(myIntent);
+                finish();
+            }
+        });
     }
 
     @Override

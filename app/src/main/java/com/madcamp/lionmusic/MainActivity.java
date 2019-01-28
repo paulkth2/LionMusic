@@ -176,8 +176,12 @@ public class MainActivity extends AppCompatActivity {
         todayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyMusicActivity.class);
-                startActivity(intent);
+                if(FirebaseAuth.getInstance().getCurrentUser()==null){
+                    Toast.makeText(MainActivity.this, "Please Log In", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), MyMusicActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

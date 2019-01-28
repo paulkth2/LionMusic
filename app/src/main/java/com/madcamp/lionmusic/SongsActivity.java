@@ -103,7 +103,7 @@ public class SongsActivity extends Activity {
         songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(SongsActivity.this, "clicked item"+position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SongsActivity.this, "clicked item"+position, Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(SongsActivity.this, PlayerActivity.class);
                 myIntent.putExtra("uri", titles.get(position).getSongUri().toString());
                 myIntent.putExtra("title", titles.get(position).getTitle());

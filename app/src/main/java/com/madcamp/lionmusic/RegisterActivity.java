@@ -97,34 +97,41 @@ public class RegisterActivity extends AppCompatActivity {
                                     User user = new User();
                                     user.setEmail(email.getText().toString());
                                     user.setNickname(nick.getText().toString());
+                                    user.setProfile("ryan01.png");
 
-                                    /**
-                                     * Just creating dummy data for testing purposes on Register
 
-                                    user.setProfile("Hello~");
+                                    List<String> friendList = new ArrayList<>();
+                                    friendList.add("paulkth2@naver.com");
+                                    friendList.add("paulkth3@naver.com");
+                                    friendList.add("paulkth4@naver.com");
+                                    user.setFriends(friendList);
 
-                                    HashMap<String, String> friendMap = new HashMap<>();
-                                    friendMap.put("email", "paulkth3@naver.com");
-                                    user.setFriends(friendMap);
+                                    List<String> likedArtistList = new ArrayList<>();
+                                    likedArtistList.add("Imagine Dragons");
+                                    likedArtistList.add("Sia");
+                                    likedArtistList.add("Pentatonix");
+                                    user.setLikedArtist(likedArtistList);
 
-                                    HashMap<String, String> likedArtistMap = new HashMap<>();
-                                    likedArtistMap.put("name", "Imagine Dragons");
-                                    user.setLikedArtist(likedArtistMap);
-
-                                    HashMap<String, String> tagsMap = new HashMap<>();
-                                    tagsMap.put("name", "Calming");
-                                    user.setTags(tagsMap);
+                                    List<String> tagsList = new ArrayList<>();
+                                    tagsList.add("Charming");
+                                    tagsList.add("Cool");
+                                    tagsList.add("Exciting");
+                                    user.setTags(tagsList);
 
                                     List<HashMap<String, String>> likedSongList = new ArrayList<>();
                                     HashMap<String, String> song = new HashMap<>();
                                     song.put("title", "Thunder");
-                                    song.put("artist", "Imagine Dragons");
+                                    song.put("artist", "Adam Sanders");
+                                    song.put("url", "https://storage.googleapis.com/gb_spotify20k/spotify_preview_audios/5SexQfrzlUXaW3SRlceVEt.mp3");
+                                    likedSongList.add(song);
+                                    song = new HashMap<>();
+                                    song.put("title", "Chandelier");
+                                    song.put("artist", "Sia");
+                                    song.put("url", "https://storage.googleapis.com/gb_spotify20k/spotify_preview_audios/3D4QFgYa3P9P0gjmv4eX6I.mp3");
                                     likedSongList.add(song);
                                     user.setLikedSongs(likedSongList);
 
 
-                                     * which finishes right here!
-                                     */
 
                                     DatabaseReference newUser = firebaseDatabase.getReference().child("users").push();
 
