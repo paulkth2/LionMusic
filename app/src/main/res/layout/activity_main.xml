@@ -96,7 +96,7 @@
                     android:textColor="#452007"
                     android:textSize="15sp"
                     android:textAlignment="center"
-                    android:text="Today's music"/>
+                    android:text="My music"/>
             </LinearLayout>
 
             <LinearLayout
