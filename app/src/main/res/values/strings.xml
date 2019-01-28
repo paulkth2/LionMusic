@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">LionMusic</string>
-    <string name="edit_text_hint">Your fav song</string>
-    <string name="kakao_app_key">8e59ed9917e32569fb806167960dc726</string>
+    <string name="edit_text_hint">I feel like...</string>
 </resources>

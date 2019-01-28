@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:id="@+id/loginCloseButton"
+            android:id="@+id/registerCloseButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="right"
@@ -44,10 +44,40 @@
                 android:text="EMAIL: "/>
 
             <EditText
-                android:id="@+id/EmailInput"
+                android:id="@+id/RegisterEmailInput"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="EMAIL"
+                android:fontFamily="@font/quicksand_bold"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:background="@color/colorBackground"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_bold"
+                android:textSize="15sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:text="Nickname: "/>
+
+            <EditText
+                android:id="@+id/NicknameInput"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nickname"
                 android:fontFamily="@font/quicksand_bold"
                 android:textSize="20sp"
                 android:textColor="@color/colorPrimaryDark"
@@ -74,7 +104,7 @@
                 android:text="PW: "/>
 
             <EditText
-                android:id="@+id/PWInput"
+                android:id="@+id/RegisterPWInput"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="PW"
@@ -94,20 +124,20 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/loginButton"
+                android:id="@+id/RegisterConfirmButton"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/colorPrimary"
-                android:text="LOG IN"
+                android:text="REGISTER"
                 android:textSize="15sp"
                 android:fontFamily="@font/quicksand_bold"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"/>
 
             <Button
-                android:id="@+id/cancelButton"
+                android:id="@+id/RegisterCancelButton"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -120,20 +150,5 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"/>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/colorPrimary"
-            android:text="REGISTER"
-            android:textSize="15sp"
-            android:fontFamily="@font/quicksand_bold"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"/>
     </LinearLayout>
 </LinearLayout>
