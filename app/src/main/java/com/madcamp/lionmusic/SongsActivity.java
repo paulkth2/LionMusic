@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +18,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +46,10 @@ public class SongsActivity extends Activity {
 
     private LoadingView loadingView;
 
+    private ArrayList<HashMap<String, String>> likedSongs;
+
+    private DatabaseReference likedArtistPreference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +68,7 @@ public class SongsActivity extends Activity {
         int kakao_3 = R.drawable.kakao3;
         int kakao_4 = R.drawable.kakao4;
         loadingView.addAnimation(Color.parseColor("#ffebf4"), kakao_1, LoadingView.FROM_LEFT);
-        loadingView.addAnimation(Color.parseColor("#ebfff6"), kakao_2,LoadingView.FROM_TOP);
+        loadingView.addAnimation(Color.parseColor("#ebfff6"), kakao_2, LoadingView.FROM_TOP);
         loadingView.addAnimation(Color.parseColor("#f0ebff"), kakao_3, LoadingView.FROM_RIGHT);
         loadingView.addAnimation(Color.parseColor("#dbe7b5"), kakao_4, LoadingView.FROM_BOTTOM);
 
@@ -64,20 +76,43 @@ public class SongsActivity extends Activity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d(TAG, "onResponse: is it even trying?");
                 try {
                     JSONArray resultArray = response.getJSONArray("results");
-                    Log.d(TAG, "onResponse: response Arrived");
-                    Log.d(TAG, "onResponse: responses:" +resultArray.toString());
                     for (int i=0; i < resultArray.length(); i++) {
                         JSONObject jsonObject = resultArray.getJSONObject(i);
-                        titles.add(new SongItem(jsonObject.getString("title"), jsonObject.getJSONArray("artists").getJSONObject(0).getString("name"), Uri.parse(jsonObject.getString("audio_url"))));
+                        titles.add(new SongItem(jsonObject.getString("title"), jsonObject.getJSONArray("artists").getJSONObject(0).getString("name"), Uri.parse(jsonObject.getString("audio_url")), false));
                     }
 
-                    SongAdapter adapter2 = new SongAdapter(SongsActivity.this, R.layout.song_item, titles, false);
-                    songList.setAdapter(adapter2);
 
-                    loadingView.pauseAnimation();
+                    likedArtistPreference = FirebaseDatabase.getInstance().getReference();
+
+                    Query artistQuery = likedArtistPreference.child("users").orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                    //getting liked aritist
+                    artistQuery.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for(DataSnapshot post : dataSnapshot.getChildren()){
+                                likedSongs = (ArrayList<HashMap<String, String>>) post.child("likedSongs").getValue();
+                                for (int i=0; i<likedSongs.size(); i++){
+                                    for (int j=0; j<titles.size(); j++){
+                                        if(likedSongs.get(i).get("title").equals(titles.get(j).getTitle()) && likedSongs.get(i).get("artist").equals(titles.get(j).getArtist())){
+                                            titles.get(j).setLiked(true);
+                                        }
+                                    }
+                                }
+
+                                SongAdapter adapter2 = new SongAdapter(SongsActivity.this, R.layout.song_item, titles);
+                                songList.setAdapter(adapter2);
+
+                                loadingView.pauseAnimation();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
 
                 } catch (JSONException e) {
                     Log.d(TAG, "onResponse: exception catching");
@@ -100,6 +135,9 @@ public class SongsActivity extends Activity {
 
         Volley.newRequestQueue(SongsActivity.this).add(jsonObjectRequest);
 
+
+
+
         songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,6 +146,7 @@ public class SongsActivity extends Activity {
                 myIntent.putExtra("uri", titles.get(position).getSongUri().toString());
                 myIntent.putExtra("title", titles.get(position).getTitle());
                 myIntent.putExtra("artist", titles.get(position).getArtist());
+                myIntent.putExtra("liked", titles.get(position).isLiked());
                 startActivity(myIntent);
             }
         });

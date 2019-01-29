@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +46,9 @@ public class MyMusicActivity extends AppCompatActivity {
 
     private DatabaseReference likedArtistPreference;
 
+    private TextView tagText1;
+    private TextView tagText2;
+    private TextView tagText3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -60,6 +64,10 @@ public class MyMusicActivity extends AppCompatActivity {
 
         likedSongsArray = new ArrayList<>();
         likedArtistArray = new ArrayList<>();
+
+        tagText1 = findViewById(R.id.likedTag1);
+        tagText2 = findViewById(R.id.likedTag2);
+        tagText3 = findViewById(R.id.likedTag3);
 
         //홈으로 돌아가는 버튼
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +99,7 @@ public class MyMusicActivity extends AppCompatActivity {
 
         Query artistQuery = likedArtistPreference.child("users").orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-        Log.d(TAG, "onCreate: Query");
+        //getting liked aritist
         artistQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -113,6 +121,7 @@ public class MyMusicActivity extends AppCompatActivity {
             }
         });
 
+        //getting liked songs
         artistQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -120,11 +129,11 @@ public class MyMusicActivity extends AppCompatActivity {
                     ArrayList<HashMap<String, String>> likedSongs = (ArrayList<HashMap<String, String>>) post.child("likedSongs").getValue();
                     likedSongsArray = new ArrayList<>();
                     for (int i=0; i<likedSongs.size(); i++){
-                        SongItem newSong = new SongItem(likedSongs.get(i).get("title"), likedSongs.get(i).get("artist"), Uri.parse(likedSongs.get(i).get("url")));
+                        SongItem newSong = new SongItem(likedSongs.get(i).get("title"), likedSongs.get(i).get("artist"), Uri.parse(likedSongs.get(i).get("url")), true);
 
                         likedSongsArray.add(newSong);
                     }
-                    SongAdapter adapter = new SongAdapter(MyMusicActivity.this, R.layout.song_item, likedSongsArray, true);
+                    SongAdapter adapter = new SongAdapter(MyMusicActivity.this, R.layout.song_item, likedSongsArray);
                     songList.setAdapter(adapter);
                     //Log.d(TAG, "Got this: "+likedArtists);
                 }
@@ -136,6 +145,32 @@ public class MyMusicActivity extends AppCompatActivity {
             }
         });
 
+        //getting tags
+        artistQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot post : dataSnapshot.getChildren()){
+                    ArrayList<String> tags = (ArrayList<String>) post.child("tags").getValue();
+                    if (tags.size()>0){
+                        tagText1.setText(tags.get(0));
+                    }
+                    if (tags.size()>1){
+                        tagText2.setText(tags.get(1));
+                    }
+                    if (tags.size()>2){
+                        tagText3.setText(tags.get(2));
+                    }
+                    //Log.d(TAG, "Got this: "+likedArtists);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -143,6 +178,7 @@ public class MyMusicActivity extends AppCompatActivity {
                 myIntent.putExtra("uri", likedSongsArray.get(position).getSongUri().toString());
                 myIntent.putExtra("title", likedSongsArray.get(position).getTitle());
                 myIntent.putExtra("artist", likedSongsArray.get(position).getArtist());
+                myIntent.putExtra("liked", true);
                 startActivity(myIntent);
             }
         });

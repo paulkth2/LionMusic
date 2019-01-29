@@ -26,17 +26,15 @@ public class SongAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<SongItem> titles;
     private int layout;
-    private boolean liked;
 
     private final Context mContext;
 
 
-    public SongAdapter(Context context, int layout, ArrayList<SongItem> titles, boolean liked){
+    public SongAdapter(Context context, int layout, ArrayList<SongItem> titles){
         this.inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.titles=titles;
         this.layout=layout;
         this.mContext=context;
-        this.liked=liked;
     }
 
 
@@ -60,7 +58,7 @@ public class SongAdapter extends BaseAdapter {
         TextView title=(TextView)convertView.findViewById(R.id.songTitle);
         title.setText(songitem.getTitle());
         ToggleButton heartToggle = convertView.findViewById(R.id.likeButton);
-        heartToggle.setChecked(liked);
+        heartToggle.setChecked(songitem.isLiked());
         return convertView;
     }
 
