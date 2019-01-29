@@ -1,79 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FriendActivity"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="70dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/homebutton"
+            android:layout_gravity="center_vertical"/>
 
-            <ImageButton
-                android:id="@+id/homeButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/homebutton"
-                android:layout_gravity="center_vertical"/>
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="40dp"
+            android:src="@drawable/logo"/>
 
-            <ImageView
-                android:layout_width="180dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="40dp"
-                android:src="@drawable/logo"/>
+        <ImageButton
+            android:id="@+id/logoutButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/logoutbutton"/>
+    </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/logoutButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/logoutbutton"/>
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_marginLeft="100dp"
+            android:text="Friends"
+            android:textAlignment="center"
+            android:fontFamily="@font/quicksand_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:text="Friends"
-                android:textAlignment="center"
-                android:fontFamily="@font/quicksand_bold"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="25sp"/>
-
-            <ImageButton
-                android:id="@+id/addButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="100dp"
-                android:background="@drawable/addbutton" />
-
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/friendListview"
-            android:layout_width="match_parent"
-            android:clickable="true"
-            android:layout_height="420dp">
-        </ListView>
+        <ImageButton
+            android:id="@+id/addButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/addbutton"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            />
 
     </LinearLayout>
-</ScrollView>
+
+    <ListView
+        android:id="@+id/friendListview"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:layout_height="420dp">
+    </ListView>
+
+</LinearLayout>

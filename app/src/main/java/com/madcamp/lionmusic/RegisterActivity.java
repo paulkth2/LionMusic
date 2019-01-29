@@ -97,19 +97,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     User user = new User();
                                     user.setEmail(email.getText().toString());
                                     user.setNickname(nick.getText().toString());
-                                    user.setProfile("ryan01.png");
-
+                                    user.setProfile("1");
 
                                     List<String> friendList = new ArrayList<>();
                                     friendList.add("paulkth2@naver.com");
-                                    friendList.add("paulkth3@naver.com");
-                                    friendList.add("paulkth4@naver.com");
                                     user.setFriends(friendList);
 
                                     List<String> likedArtistList = new ArrayList<>();
                                     likedArtistList.add("Imagine Dragons");
-                                    likedArtistList.add("Sia");
-                                    likedArtistList.add("Pentatonix");
                                     user.setLikedArtist(likedArtistList);
 
                                     List<String> tagsList = new ArrayList<>();
@@ -123,11 +118,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     song.put("title", "Thunder");
                                     song.put("artist", "Adam Sanders");
                                     song.put("url", "https://storage.googleapis.com/gb_spotify20k/spotify_preview_audios/5SexQfrzlUXaW3SRlceVEt.mp3");
-                                    likedSongList.add(song);
-                                    song = new HashMap<>();
-                                    song.put("title", "Chandelier");
-                                    song.put("artist", "Sia");
-                                    song.put("url", "https://storage.googleapis.com/gb_spotify20k/spotify_preview_audios/3D4QFgYa3P9P0gjmv4eX6I.mp3");
                                     likedSongList.add(song);
                                     user.setLikedSongs(likedSongList);
 

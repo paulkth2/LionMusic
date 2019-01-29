@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -62,7 +63,6 @@ public class FriendActivity extends AppCompatActivity {
                     friendList.setAdapter(adapter);
                     //SongAdapter adapter2 = new SongAdapter(SongsActivity.this, R.layout.song_item, titles);
                     //songList.setAdapter(adapter2);
-
                     //loadingView.pauseAnimation();
                 }
             }
@@ -76,7 +76,7 @@ public class FriendActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent myIntent = new Intent(FriendActivity.this, FriendMusicActivity.class);
-                myIntent.putExtra("friendEmail", mfriends.get(position));
+                myIntent.putExtra("email", mfriends.get(position));
                 startActivity(myIntent);
             }
         });
