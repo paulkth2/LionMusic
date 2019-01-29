@@ -45,13 +45,6 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <ImageButton
-            android:id="@+id/friendRefreshButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/addbutton" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +59,7 @@
             android:id="@+id/addButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="100dp"
             android:background="@drawable/addbutton" />
 
     </LinearLayout>
