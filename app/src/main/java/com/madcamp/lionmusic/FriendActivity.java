@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,16 +23,19 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FriendActivity extends AppCompatActivity {
+    private static final String TAG = "FriendActivity";
 
     private ImageButton addFriendButton;
     private DatabaseReference likedArtistPreference;
     private ArrayList<String> mfriends;
+    private ListView friendList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
 
+        friendList = findViewById(R.id.friendListview);
         mfriends = new ArrayList<>();
 
 
@@ -51,7 +57,9 @@ public class FriendActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot post : dataSnapshot.getChildren()) {
                     mfriends = (ArrayList<String>) post.child("friends").getValue();
-
+                    Log.d(TAG, "onDataChange: "+mfriends);
+                    FriendAdapter adapter = new FriendAdapter(FriendActivity.this, R.layout.friend_item, mfriends);
+                    friendList.setAdapter(adapter);
                     //SongAdapter adapter2 = new SongAdapter(SongsActivity.this, R.layout.song_item, titles);
                     //songList.setAdapter(adapter2);
 
@@ -63,6 +71,16 @@ public class FriendActivity extends AppCompatActivity {
 
             }
         });
+
+        friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent myIntent = new Intent(FriendActivity.this, FriendMusicActivity.class);
+                myIntent.putExtra("friendEmail", mfriends.get(position));
+                startActivity(myIntent);
+            }
+        });
+
     }
 
     @Override

@@ -31,6 +31,8 @@ import java.util.List;
 public class MyMusicActivity extends AppCompatActivity {
     private static final String TAG = "MyMusicActivity";
 
+    private ImageView profileImage;
+
     private ImageButton homeButton;
     private ImageButton logoutButton;
     private ImageButton friendButton;
@@ -74,6 +76,8 @@ public class MyMusicActivity extends AppCompatActivity {
 
         nick = findViewById(R.id.nickname);
 
+        profileImage = findViewById(R.id.profileImage);
+
         //홈으로 돌아가는 버튼
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +104,7 @@ public class MyMusicActivity extends AppCompatActivity {
             }
         });
 
-        ImageView profileImage = findViewById(R.id.profileImage);
+        final ImageView profileImage = findViewById(R.id.profileImage);
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +124,72 @@ public class MyMusicActivity extends AppCompatActivity {
                     String nickname = (String) post.child("nickname").getValue();
                     likedArtistArray = new ArrayList<>();
                     nick.setText(nickname);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        //getting profile
+        artistQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot post : dataSnapshot.getChildren()){
+                    String profile = (String) post.child("profile").getValue();
+                    Log.d(TAG, "onDataChange: "+Integer.parseInt(profile));
+                    switch (Integer.parseInt(profile)){
+                        case 0:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan01));
+                            break;
+                        case 1:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan02));
+                            break;
+                        case 2:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan03));
+                            break;
+                        case 3:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan04));
+                            break;
+                        case 4:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan05));
+                            break;
+                        case 5:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan06));
+                            break;
+                        case 6:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan07));
+                            break;
+                        case 7:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan08));
+                            break;
+                        case 8:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan09));
+                            break;
+                        case 9:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan10));
+                            break;
+                        case 10:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan11));
+                            break;
+                        case 11:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan12));
+                            break;
+                        case 12:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan13));
+                            break;
+                        case 13:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan14));
+                            break;
+                        case 14:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan15));
+                            break;
+                        case 15:
+                            profileImage.setImageDrawable(getResources().getDrawable(R.drawable.ryan16));
+                            break;
+                    }
                 }
             }
 

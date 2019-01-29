@@ -67,6 +67,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     private boolean stopDuplicate;
     private boolean stopInsertDuplicate;
+    private boolean stopDuplicateArtist;
 
 
     @Override
@@ -97,6 +98,7 @@ public class PlayerActivity extends AppCompatActivity {
 
         stopDuplicate = false;
         stopInsertDuplicate = false;
+        stopDuplicateArtist = false;
         key = "";
         mediaPlayer = new MediaPlayer();
 
@@ -124,6 +126,9 @@ public class PlayerActivity extends AppCompatActivity {
             likedSong.setClickable(false);
         }
         likedArtist.setChecked(false);
+        if(likedArtist.isChecked()){
+            likedArtist.setClickable(false);
+        }
 
         likedArtistPreference = FirebaseDatabase.getInstance().getReference();
 
@@ -306,6 +311,35 @@ public class PlayerActivity extends AppCompatActivity {
                     });
 
                     //FirebaseDatabase.getInstance().getReference().getRoot().child("users").child(key).child("likedSongs").child(newSongKey).setValue(song);
+                }
+            }
+        });
+
+        likedArtist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(likedArtist.isChecked()){
+                    //getting nickname
+                    FirebaseDatabase.getInstance().getReference().getRoot().child("users").child(key).child("likedArtist").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ArrayList<String> givenList = (ArrayList<String>) dataSnapshot.getValue();
+                            if (givenList == null) {
+                                givenList = new ArrayList<>();
+                            }
+                            if (!stopDuplicateArtist) {
+                                givenList.add(getIntent().getStringExtra("artist"));
+                                FirebaseDatabase.getInstance().getReference().getRoot().child("users").child(key).child("likedArtist").setValue(givenList);
+                                stopDuplicateArtist = true;
+                                likedArtist.setClickable(false);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
         });

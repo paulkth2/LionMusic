@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 public class FriendAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private ArrayList<FriendItem> friends;
+    private ArrayList<String> friends;
     private int layout;
 
     private final Context mContext;
 
-    public FriendAdapter(Context context, int layout, ArrayList<FriendItem> friends) {
+    public FriendAdapter(Context context, int layout, ArrayList<String> friends) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.friends = friends;
         this.layout = layout;
@@ -30,7 +30,7 @@ public class FriendAdapter extends BaseAdapter {
 
     @Override
     public String getItem(int position) {
-        return friends.get(position).getFriendEmail();
+        return friends.get(position);
     }
 
     @Override
@@ -43,10 +43,10 @@ public class FriendAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(layout, parent, false);
         }
-        FriendItem frienditem = friends.get(position);
+        String friendEmailtxt = friends.get(position);
 
         TextView friendEmail = (TextView) convertView.findViewById(R.id.friendEmailText);
-        friendEmail.setText(frienditem.getFriendEmail());
+        friendEmail.setText(friendEmailtxt);
         return convertView;
     }
 }

@@ -119,7 +119,7 @@
                     android:textColor="#452007"
                     android:textSize="15sp"
                     android:textAlignment="center"
-                    android:text="Search\n"/>
+                    android:text="Search"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
