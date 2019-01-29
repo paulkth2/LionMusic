@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SelectProfileActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/selectProfileCloseButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/closebutton" />
+
+        <GridView
+            android:id="@+id/profileGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:columnWidth="200dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            android:numColumns="4"
+            android:listSelector="@color/colorBackground"/>
+
+        <Button
+            android:id="@+id/selectProfileCancelButton"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:text="CANCEL"
+            android:textSize="15sp"
+            android:fontFamily="@font/quicksand_bold"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -28,8 +28,11 @@
             android:theme="@style/Theme.Transparent" />
         <activity android:name=".MyMusicActivity" />
         <activity android:name=".FriendActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".AddFriendActivity"></activity>
+        <activity android:name=".RegisterActivity"
+            android:theme="@style/Theme.Transparent"/>
+        <activity android:name=".AddFriendActivity" />
+        <activity android:name=".SelectProfileActivity"
+            android:theme="@style/Theme.Transparent"/>
     </application>
 
 </manifest>
