@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,6 +100,14 @@ public class MyMusicActivity extends AppCompatActivity {
             }
         });
 
+        ImageView profileImage = findViewById(R.id.profileImage);
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SelectProfileActivity.class);
+                startActivity(intent);
+            }
+        });
         likedArtistPreference = FirebaseDatabase.getInstance().getReference();
 
         Query artistQuery = likedArtistPreference.child("users").orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail());
