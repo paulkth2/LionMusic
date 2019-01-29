@@ -93,10 +93,14 @@ public class SongsActivity extends Activity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for(DataSnapshot post : dataSnapshot.getChildren()){
                                 likedSongs = (ArrayList<HashMap<String, String>>) post.child("likedSongs").getValue();
-                                for (int i=0; i<likedSongs.size(); i++){
-                                    for (int j=0; j<titles.size(); j++){
-                                        if(likedSongs.get(i).get("title").equals(titles.get(j).getTitle()) && likedSongs.get(i).get("artist").equals(titles.get(j).getArtist())){
-                                            titles.get(j).setLiked(true);
+                                if(likedSongs != null) {
+                                    for (int i = 0; i < likedSongs.size(); i++) {
+                                        for (int j = 0; j < titles.size(); j++) {
+                                            if(likedSongs.get(i) != null) {
+                                                if (likedSongs.get(i).get("title").equals(titles.get(j).getTitle()) && likedSongs.get(i).get("artist").equals(titles.get(j).getArtist())) {
+                                                    titles.get(j).setLiked(true);
+                                                }
+                                            }
                                         }
                                     }
                                 }

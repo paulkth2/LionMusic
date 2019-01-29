@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -18,7 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class PlayerActivity extends AppCompatActivity {
@@ -46,6 +57,17 @@ public class PlayerActivity extends AppCompatActivity {
     private int forwardTime = 5000;
     private int backwardTime = 5000;
 
+    private ToggleButton likedArtist;
+    private ToggleButton likedSong;
+
+    private DatabaseReference likedArtistPreference;
+    private ArrayList<String> likedArtists;
+
+    private String key;
+
+    private boolean stopDuplicate;
+    private boolean stopInsertDuplicate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +92,12 @@ public class PlayerActivity extends AppCompatActivity {
         titleText.setText(getIntent().getStringExtra("title"));
         artistText.setText(getIntent().getStringExtra("artist"));
 
+        likedSong = findViewById(R.id.likeSongButton);
+        likedArtist = findViewById(R.id.likeArtistButton);
+
+        stopDuplicate = false;
+        stopInsertDuplicate = false;
+        key = "";
         mediaPlayer = new MediaPlayer();
 
         try {
@@ -90,6 +118,36 @@ public class PlayerActivity extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
         }
+
+        likedSong.setChecked(getIntent().getBooleanExtra("liked", false));
+        if(likedSong.isChecked()){
+            likedSong.setClickable(false);
+        }
+        likedArtist.setChecked(false);
+
+        likedArtistPreference = FirebaseDatabase.getInstance().getReference();
+
+        Query artistQuery = likedArtistPreference.child("users").orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        //getting liked aritist
+        artistQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot post : dataSnapshot.getChildren()) {
+                    key = post.getKey();
+                    likedArtists = (ArrayList<String>) post.child("likedArtist").getValue();
+                    for (int i = 0; i < likedArtists.size(); i++) {
+                        if (likedArtists.get(i).equals(getIntent().getStringExtra("artist"))) {
+                            likedArtist.setChecked(true);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
         playButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -191,6 +249,64 @@ public class PlayerActivity extends AppCompatActivity {
                 seekBar.setProgress(0);
                 startActivity(myIntent);
                 finish();
+            }
+        });
+
+        //song like onClickListener
+        likedSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!likedSong.isChecked()){
+                    /*
+                    Log.d(TAG, "onClick: clicked");
+                    FirebaseDatabase.getInstance().getReference().getRoot().child("users").child(key).child("likedSongs").orderByChild("title").equalTo(getIntent().getStringExtra("title")).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot post: dataSnapshot.getChildren()){
+                                String Songkey = post.getKey();
+                                Log.d(TAG, "onDataChange: "+Songkey);
+                                dataSnapshot.getRef().child(Songkey).removeValue();
+                                stopDuplicate=false;
+                                stopInsertDuplicate=false;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    */
+                } else {
+
+                    //getting nickname
+                    FirebaseDatabase.getInstance().getReference().getRoot().child("users").child(key).child("likedSongs").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ArrayList<HashMap<String, String>> givenList = (ArrayList<HashMap<String,String>>) dataSnapshot.getValue();
+                            if(givenList == null){
+                                givenList = new ArrayList<>();
+                            }
+                            if(!stopDuplicate) {
+                                    HashMap<String, String> song = new HashMap<>();
+                                    song.put("title", getIntent().getStringExtra("title"));
+                                    song.put("artist", getIntent().getStringExtra("artist"));
+                                    song.put("url", getIntent().getStringExtra("uri"));
+                                    givenList.add(song);
+                                    FirebaseDatabase.getInstance().getReference().getRoot().child("users").child(key).child("likedSongs").setValue(givenList);
+                                    stopDuplicate = true;
+                                    likedSong.setClickable(false);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    //FirebaseDatabase.getInstance().getReference().getRoot().child("users").child(key).child("likedSongs").child(newSongKey).setValue(song);
+                }
             }
         });
 

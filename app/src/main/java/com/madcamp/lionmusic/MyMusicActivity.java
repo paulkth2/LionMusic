@@ -50,6 +50,8 @@ public class MyMusicActivity extends AppCompatActivity {
     private TextView tagText2;
     private TextView tagText3;
 
+    private TextView nick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -68,6 +70,8 @@ public class MyMusicActivity extends AppCompatActivity {
         tagText1 = findViewById(R.id.likedTag1);
         tagText2 = findViewById(R.id.likedTag2);
         tagText3 = findViewById(R.id.likedTag3);
+
+        nick = findViewById(R.id.nickname);
 
         //홈으로 돌아가는 버튼
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +103,23 @@ public class MyMusicActivity extends AppCompatActivity {
 
         Query artistQuery = likedArtistPreference.child("users").orderByChild("email").equalTo(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
+        //getting nickname
+        artistQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot post : dataSnapshot.getChildren()){
+                    String nickname = (String) post.child("nickname").getValue();
+                    likedArtistArray = new ArrayList<>();
+                    nick.setText(nickname);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         //getting liked aritist
         artistQuery.addValueEventListener(new ValueEventListener() {
             @Override
@@ -128,13 +149,16 @@ public class MyMusicActivity extends AppCompatActivity {
                 for(DataSnapshot post : dataSnapshot.getChildren()){
                     ArrayList<HashMap<String, String>> likedSongs = (ArrayList<HashMap<String, String>>) post.child("likedSongs").getValue();
                     likedSongsArray = new ArrayList<>();
-                    for (int i=0; i<likedSongs.size(); i++){
-                        SongItem newSong = new SongItem(likedSongs.get(i).get("title"), likedSongs.get(i).get("artist"), Uri.parse(likedSongs.get(i).get("url")), true);
-
-                        likedSongsArray.add(newSong);
+                    if (likedSongs != null) {
+                        for (int i = 0; i < likedSongs.size(); i++) {
+                            if (likedSongs.get(i) != null) {
+                                SongItem newSong = new SongItem(likedSongs.get(i).get("title"), likedSongs.get(i).get("artist"), Uri.parse(likedSongs.get(i).get("url")), true);
+                                likedSongsArray.add(newSong);
+                            }
+                        }
+                        SongAdapter adapter = new SongAdapter(MyMusicActivity.this, R.layout.song_item, likedSongsArray);
+                        songList.setAdapter(adapter);
                     }
-                    SongAdapter adapter = new SongAdapter(MyMusicActivity.this, R.layout.song_item, likedSongsArray);
-                    songList.setAdapter(adapter);
                     //Log.d(TAG, "Got this: "+likedArtists);
                 }
             }
