@@ -30,6 +30,7 @@ public class FriendActivity extends AppCompatActivity {
     private DatabaseReference likedArtistPreference;
     private ArrayList<String> mfriends;
     private ListView friendList;
+    private ImageButton refreshFriendButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class FriendActivity extends AppCompatActivity {
 
         friendList = findViewById(R.id.friendListview);
         mfriends = new ArrayList<>();
-
+        refreshFriendButton = findViewById(R.id.friendRefreshButton);
 
         addFriendButton = findViewById(R.id.addButton);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +60,9 @@ public class FriendActivity extends AppCompatActivity {
                 for (DataSnapshot post : dataSnapshot.getChildren()) {
                     mfriends = (ArrayList<String>) post.child("friends").getValue();
                     Log.d(TAG, "onDataChange: "+mfriends);
+                    FriendAdapter adapter = new FriendAdapter(FriendActivity.this, R.layout.friend_item, mfriends);
+                    friendList.setAdapter(adapter);
+
                     //SongAdapter adapter2 = new SongAdapter(SongsActivity.this, R.layout.song_item, titles);
                     //songList.setAdapter(adapter2);
                     //loadingView.pauseAnimation();
@@ -70,8 +74,8 @@ public class FriendActivity extends AppCompatActivity {
             }
         });
 
-        FriendAdapter adapter = new FriendAdapter(FriendActivity.this, R.layout.friend_item, mfriends);
-        friendList.setAdapter(adapter);
+
+
 
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
