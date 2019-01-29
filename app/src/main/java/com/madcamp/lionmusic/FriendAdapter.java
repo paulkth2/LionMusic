@@ -47,8 +47,6 @@ public class FriendAdapter extends BaseAdapter {
 
         TextView friendEmail = (TextView) convertView.findViewById(R.id.friendEmailText);
         friendEmail.setText(frienditem.getFriendEmail());
-        TextView friendName = (TextView) convertView.findViewById(R.id.friendNicknameText);
-        friendName.setText(frienditem.getFriendNickname());
         return convertView;
     }
 }
